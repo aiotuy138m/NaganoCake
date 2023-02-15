@@ -1,7 +1,7 @@
 <h2>ログイン</h2>
 
 <h4>会員の方はこちらからログイン</h4>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_with model: @customer, url: customer_session_path do |f| %>
   <table>
     <tr class="field">
       <th><%= f.label "メールアドレス" %></th>
