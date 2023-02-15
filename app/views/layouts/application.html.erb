@@ -34,16 +34,16 @@
           <% elsif customer_signed_in? %>
           <!--「ようこそ、nameさん！」の記述!-->
           <li>
-            <%= link_to "マイページ", %>
+            <%= link_to "マイページ", customers_my_page_path %>
           </li>
           <li>
-            <%= link_to "商品一覧", %>
+            <%= link_to "商品一覧", items_path%>
           </li>
           <li>
-            <%= link_to "カート", %>
+            <%= link_to "カート", cart_items_path %>
           </li>
           <li>
-            <%= link_to "ログアウト", %>
+            <%= link_to "ログアウト", destroy_customer_session_path %>
           </li>
           <% else %>
           <li>
@@ -62,5 +62,8 @@
       </nav>
     </header>
     <%= yield %>
+    <footer>
+      <div></div>
+    </footer>
   </body>
 </html>
