@@ -2,7 +2,7 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
-  
+
   <table>
     <tr class="field">
       <th><%= f.label "名前" %></th>
@@ -51,14 +51,16 @@
       <th><%= f.label "パスワード(確認用)" %></th>
       <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
     </tr>
+    <tr class="actions">
+      <th></th>
+      <td><%= f.submit "新規登録" %></td>
+    </tr>
   </table>
-  <div class="actions">
-    <%= f.submit "新規登録" %>
-  </div>
+
 <% end %>
 
 
-<h2>すでに登録済みの方</h2>
+<h4>すでに登録済みの方</h4>
 
 <p>
   <%= link_to "こちら", customer_session_path %> からログインしてください
