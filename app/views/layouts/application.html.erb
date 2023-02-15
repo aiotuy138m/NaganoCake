@@ -11,6 +11,65 @@
   </head>
 
   <body>
+    <header>
+      <nav>
+        <!--ロゴの記述!-->
+        <div></div>
+        <ul>
+          <% if request.fullpath.include? "/admin" %>
+          <li>
+            <%= link_to "商品一覧", admin_items_path %>
+          </li>
+          <li>
+            <%= link_to "会員一覧", admin_customers_path %>
+          </li>
+          <li>
+            <%= link_to "注文履歴一覧", admin_order_path %>
+          </li>
+          <li>
+            <%= link_to "ジャンル一覧", admin_genre_path %>
+          </li>
+          <li>
+            <%= link_to "ログアウト", destroy_admin_session_path %>
+          </li>
+          <% elsif customer_signed_in? %>
+          <!--「ようこそ、名字さん！」の記述!-->
+          <p>ようこそ、
+            <% current_customer.last_name %>
+            さん！
+          </p>
+          <li>
+            <%= link_to "マイページ", customers_my_page_path %>
+          </li>
+          <li>
+            <%= link_to "商品一覧", items_path%>
+          </li>
+          <li>
+            <%= link_to "カート", cart_items_path %>
+          </li>
+          <li>
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+          </li>
+          <% else %>
+          <li>
+            <%= link_to "About", about_path %>
+          </li>
+          <li>
+            <%= link_to "商品一覧", items_path %>
+          </li>
+          <li>
+            <%= link_to "新規登録", new_customer_registration_path %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_customer_session_path %>
+          </li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
     <%= yield %>
+    <footer>
+      <div></div>
+    </footer>
   </body>
 </html>
