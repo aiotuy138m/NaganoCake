@@ -14,6 +14,7 @@
     <header>
       <nav>
         <!--ロゴの記述!-->
+        <div></div>
         <ul>
           <% if request.fullpath.include? "/admin" %>
           <li>
@@ -32,7 +33,11 @@
             <%= link_to "ログアウト", destroy_admin_session_path %>
           </li>
           <% elsif customer_signed_in? %>
-          <!--「ようこそ、nameさん！」の記述!-->
+          <!--「ようこそ、名字さん！」の記述!-->
+          <p>ようこそ、
+            <% current_customer.last_name %>
+            さん！
+          </p>
           <li>
             <%= link_to "マイページ", customers_my_page_path %>
           </li>
@@ -43,7 +48,7 @@
             <%= link_to "カート", cart_items_path %>
           </li>
           <li>
-            <%= link_to "ログアウト", destroy_customer_session_path %>
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
           </li>
           <% else %>
           <li>
