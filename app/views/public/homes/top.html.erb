@@ -1,2 +1,20 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div><!--余裕があったら実装のジャンル検索を形だけ!-->
+  <p>ジャンル検索</p>
+  <ul>
+    <li>ケーキ</li>
+    <li>焼き菓子</li>
+    <li>プリン</li>
+    <li>キャンディ</li>
+  </ul>
+</div>
+
+<div><!--背景画像ある？!-->
+  <p>ようこそ、ながのCAKEへ！<br/>
+     このサイトは、ケーキ販売のECサイトになります。<br/>
+     会員でない方も商品の閲覧はできますが、<br/>
+     購入には会員登録が必須になります。</p>
+</div>
+
+<h1>新着商品</h1>
+<!--商品.eachの記述!-->
+<%= link_to "全ての商品を見る>", items_path %>
