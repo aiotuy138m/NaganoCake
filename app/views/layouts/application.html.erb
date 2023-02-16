@@ -35,7 +35,7 @@
           <% elsif customer_signed_in? %>
           <!--「ようこそ、名字さん！」の記述!-->
           <p>ようこそ、
-            <% current_customer.last_name %>
+            <%= current_customer.last_name %>
             さん！
           </p>
           <li>
