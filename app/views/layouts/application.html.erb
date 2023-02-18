@@ -16,7 +16,7 @@
         <!--ロゴの記述!-->
         <div></div>
         <ul>
-          <% if request.fullpath.include? "/admin" %>
+          <% if admin_signed_in? %>
           <li>
             <%= link_to "商品一覧", admin_items_path %>
           </li>
@@ -24,13 +24,13 @@
             <%= link_to "会員一覧", admin_customers_path %>
           </li>
           <li>
-            <%= link_to "注文履歴一覧", admin_order_path %>
+            <%= link_to "注文履歴一覧", admin_root_path %>
           </li>
           <li>
-            <%= link_to "ジャンル一覧", admin_genre_path %>
+            <%= link_to "ジャンル一覧", admin_genres_path %>
           </li>
           <li>
-            <%= link_to "ログアウト", destroy_admin_session_path %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
           </li>
           <% elsif customer_signed_in? %>
           <!--「ようこそ、名字さん！」の記述!-->
