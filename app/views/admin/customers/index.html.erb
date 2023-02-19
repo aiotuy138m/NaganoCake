@@ -6,11 +6,17 @@
     <th>メールアドレス</th>
     <th>ステータス</th>
   </tr>
+  <% @customers.each do |customers| %>
   <tr>
-    <tb><!--会員ID.each!--></tb>
-    <tb><!--氏名.each!--></tb>
-    <tb><!--メールアドレス.each!--></tb>
-    <tb><!--ステータス.each!--></tb>
+    <td><%= customers.id %></td>
+    <td>
+      <%= link_to admin_customer_path(customers.id) do %>
+        <%= customers.last_name+customers.first_name %>
+      <% end %>
+    </td>
+    <td><%= customers.email %></td>
+    <td><%= customers.is_deleted ? '無効' : '有効' %></td>
   </tr>
+  <% end %>
 </table>
 <!--ページネーション!-->
