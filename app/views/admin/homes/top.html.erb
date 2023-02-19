@@ -4,13 +4,18 @@
     <th>購入日時</th>
     <th>購入者</th>
     <th>注文個数</th>
-    <!--注文ステータス!-->
+    <th>注文</th>
   </tr>
+  <% @orders.each do |orders| %>
   <tr>
-    <tb><!--日時.each!--></tb>
-    <tb><!--購入者.each!--></tb>
-    <tb><!--注文個数.each!--></tb>
-    <!--注文ステータス!-->
+    <td>
+      <%= link_to admin_order_path(orders.id) do %>
+        <%= orders.created_at %>
+      <% end %>
+    </td>
+    <td><%= orders.customer_id %></td>
+    <td><!--注文個数!--></td>
+    <td><%= orders.status %></td>
   </tr>
-</table>
+  <% end %>
 <!--ページネーション!-->
