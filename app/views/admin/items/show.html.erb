@@ -2,7 +2,7 @@
   <div>
     <div>
       <h3>商品詳細</h3>
-      <div><%= image_tag @item.get_image(300, 300) %></div>
+      <div><%= image_tag @item.get_image(500, 500) %></div>
       <table>
         <tr>
           <th>商品名</th>
@@ -24,7 +24,7 @@
           <td><%= @item.is_active ? '販売中' : '販売停止中' %></td>
         </tr>
       </table>
-      <%= link_to "編集する", url: edit_admin_item_path %>
+      <%= link_to "編集する", edit_admin_item_path %>
     </div>
   </div>
 </div>

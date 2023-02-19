@@ -9,13 +9,13 @@ class Admin::ItemsController < ApplicationController
       redirect_to admin_items_path
     else
       @item = Item.all
-      render :index
+      render new_admin_item_path
     end
   end
 
   def index
     @items = Item.all
-    
+
   end
 
   def show
