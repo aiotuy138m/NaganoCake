@@ -1,2 +1,23 @@
-<h1>Public::Items#index</h1>
-<p>Find me in app/views/public/items/index.html.erb</p>
+<div>
+  <div>
+    <div>
+      <h2>商品一覧</h2>
+      <p>全<%= @items.count %>件</p>
+      <!--横４件ずつ表示の2段wrap使う!-->
+      <% @items.each do |items| %>
+      <table>
+        <tr>
+          <td>
+          <%= link_to item_path(items.id) do %>
+            <%= image_tag items.get_image(100, 100) %>
+          <% end %>
+          </td>
+        </tr>
+        <tr><td><%= items.name %></td></tr>
+        <tr><td>¥<%= (items.price*1.1).round.to_s(:delimited) %></td></tr>
+      </table>
+      <% end %>
+      <!--ページネーション!-->
+    </div>
+  </div>
+</div>

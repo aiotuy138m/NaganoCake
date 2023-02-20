@@ -1,2 +1,26 @@
-<h1>Public::Items#show</h1>
-<p>Find me in app/views/public/items/show.html.erb</p>
+<div>
+  <div>
+    <div>
+      <div><%= image_tag @item.get_image(500, 500) %></div>
+      <table>
+        <tr>
+          <th>商品名</th>
+          <td><%= @item.name %></td>
+        </tr>
+        <tr>
+          <th>商品説明</th>
+          <td><%= @item.introduction %></td>
+        </tr>
+        <tr>
+          <th>税込価格</th>
+          <td><%= (@item.price*1.1).round.to_s(:delimited) %>(税込)</td>
+          <%= form_with model: @cart_item, url: cart_items_path  do |f| %>
+          <tr>
+            <!--個数選択セレクトボタン !-->
+            <td><%= f.submit "カートに入れる", url: cart_items_path, method: :post %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
