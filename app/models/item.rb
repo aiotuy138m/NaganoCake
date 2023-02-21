@@ -14,6 +14,10 @@ class Item < ApplicationRecord
     image.variant(resize_to_limit: [width, hight]).processed
   end
   
+  def with_tax_price
+    (price*1.1).round.to_s(:delimited)
+  end
+  
   validates :name, presence: true
   validates :introduction, presence: true
   validates :genre_id, presence: true
