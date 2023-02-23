@@ -1,37 +1,70 @@
 class Public::CartItemsController < ApplicationController
-  def index
-    @cart_items = CartItem.all
-    if @cart_items == nil
-      puts "カート内は空です。"
-    else
-      return
+  def new
+    @cart_item = CartItem.new
+  end
+
+  def create
+  # @item = Item.find(cart_item_params[:item_id])
+    @cart_item = CartItem.new(cart_item_params)
+    @cart_item.customer_id = current_customer.id
+    @cart_items = current_customer.cart_items
+    @cart_item.item_id = @item.id
+  #   binding.pry
+    @cart_items.each do |cart_item|
+      if cart_item.item_id == @cart_item.item_id
+        new_amount = cart_item.amount + @cart_item.amount
+        cart_item.update_attribute(:amount, new_amount)
+        @cart_item.delete
+      end
     end
+      @cart_item.save
+      redirect_to cart_items_path
+  end
+
+
+  def index
+    @cart_items = current_customer.cart_items
+    @subtotal = 0
   end
 
   def update
-    
-  end
-
-  def destroy
-    @cart_items = CartItem.find(params[:id])
-    @cart_items.delete
-    redirect_to cart_items_path
+    @cart_item = CartItem.find(params[:id])
+    @amount = (@cart_item.amount).to_i
+    @cart_items = current_customer.cart_items
+    @cart_items.each do |cart_item|
+      if cart_item.item_id == @cart_item.item_id
+        new_amount = cart_item.amount + @cart_item.amount
+        cart_item.update_attribute(:amount, new_amount)
+        @cart_item.delete
+      end
+    end
+    if @cart_item.update(cart_item_params)
+      redirect_to cart_items_path
+    else
+      render :index
+    end
   end
 
   def destroy_all
-    @cart_items = CartItem.all
+    @cart_items = current_customer.cart_items
     @cart_items.destroy_all
     redirect_to cart_items_path
   end
 
-  def create
-    @item = Item.find(cart_item_params[:item.id])
-    @cart_item = CartItem.new
-    if @cart_item.save
-      redirect_to cart_items_path
-    else
-      @item = Item.find(params[:id])
-      render item_path
-    end
+  def destroy
+    @cart_items = current_customer.cart_items
+  #  @cart_item = CartItem.find_by(:name)
+    @cart_item.delete
+    redirect_to cart_items_path
   end
+
+
+
+
+  private
+
+  def cart_item_params
+    params.require(:cart_item).permit(:item_id, :amount)
+  end
+
 end
