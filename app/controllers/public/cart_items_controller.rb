@@ -4,19 +4,19 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
-  # @item = Item.find(cart_item_params[:item_id])
+    @item = Item.find(cart_item_params[:item_id])
     @cart_item = CartItem.new(cart_item_params)
     @cart_item.customer_id = current_customer.id
     @cart_items = current_customer.cart_items
     @cart_item.item_id = @item.id
-  #   binding.pry
-    @cart_items.each do |cart_item|
-      if cart_item.item_id == @cart_item.item_id
-        new_amount = cart_item.amount + @cart_item.amount
-        cart_item.update_attribute(:amount, new_amount)
-        @cart_item.delete
-      end
-    end
+   #  binding.pry
+   # @cart_items.each do |cart_item|
+    #  if cart_item.item_id == @cart_item.item_id
+     #   new_amount = cart_item.amount + @cart_item.amount
+      #  cart_item.update_attribute(:amount, new_amount)
+       # @cart_item.delete
+    #  end
+  #  end
       @cart_item.save
       redirect_to cart_items_path
   end
@@ -53,7 +53,7 @@ class Public::CartItemsController < ApplicationController
 
   def destroy
     @cart_items = current_customer.cart_items
-  #  @cart_item = CartItem.find_by(:name)
+    @cart_item = @cart_items.find_by(params[:item_id])
     @cart_item.delete
     redirect_to cart_items_path
   end
