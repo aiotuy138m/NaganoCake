@@ -21,7 +21,7 @@
             </td>
             <td>
               <%= f.select :amount, *[1..10] , selected: cart_item.amount %>
-              <%= f.submit "変更", url: cart_item_path(cart_item), method: :patch %>
+              <%= link_to "変更", cart_item_path(cart_item), method: :patch %>
             </td>
             <td><%= cart_item.item.with_tax_price %></td>
             <td><%= cart_item.subtotal %></td>

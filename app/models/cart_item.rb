@@ -1,5 +1,5 @@
 class CartItem < ApplicationRecord
-  belongs_to :customer, optional: true
+  belongs_to :customer
   belongs_to :item
   
   has_one_attached :image
