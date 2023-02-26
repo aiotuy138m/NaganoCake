@@ -17,7 +17,7 @@
           <td><%= (@item.with_tax_price).to_s(:delimited) %>(税込)</td>
         
                 <%= f.hidden_field :item_id, :value => @item.id %>
-                <%= f.hidden_field :customer_id, :value => current_customer.id %>
+                <%= f.hidden_field :customer_id, :value => @customer.id %>
           <tr>
             <td><%= f.select :amount, *[1..10] %></td>
             <td><%= f.submit "カートに入れる" %></td>
