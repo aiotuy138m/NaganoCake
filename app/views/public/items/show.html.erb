@@ -19,7 +19,7 @@
                 <%= f.hidden_field :item_id, :value => @item.id %>
                 <%= f.hidden_field :customer_id, :value => @customer.id %>
           <tr>
-            <td><%= f.select :amount, *[1..10] %></td>
+            <td><%= f.select :amount, *[1..10], { include_blank: "個数選択" } %></td>
             <td><%= f.submit "カートに入れる" %></td>
           </tr>
 
