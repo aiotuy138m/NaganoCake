@@ -2,7 +2,7 @@
   <div>
     <div>
       <h3>ショッピングカート</h3>
-      <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete %>
+      <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete %>
       <%= form_with model: CartItem do |f| %>
       <table>
         <thead>
