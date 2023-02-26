@@ -57,4 +57,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 
-gem 'pry-byebug' , group: :development
+gem 'pry-byebug', group: :development
+
+gem 'kaminari', '~> 1.2.1'
