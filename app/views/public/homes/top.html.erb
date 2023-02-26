@@ -16,5 +16,11 @@
 </div>
 
 <h1>新着商品</h1>
-<!--商品.eachの記述!-->
+<% @items.each do |items| %>
+  <table>
+    <tr><td><%= image_tag items.get_image(100, 100) %></td></tr>
+    <tr><td><%= items.name %></td></tr>
+    <tr><td>¥<%= (items.price*1.1).round.to_s(:delimited) %></td></tr>
+  </table>
+<% end %>
 <%= link_to "全ての商品を見る>", items_path %>

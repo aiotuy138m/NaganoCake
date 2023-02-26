@@ -1,2 +1,30 @@
-<h1>Public::Items#show</h1>
-<p>Find me in app/views/public/items/show.html.erb</p>
+<div>
+  <div>
+    <div>
+      <div><%= image_tag @item.get_image(500, 500) %></div>
+      <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+      <table>
+        <tr>
+          <th>商品名</th>
+          <td><%= @item.name %></td>
+        </tr>
+        <tr>
+          <th>商品説明</th>
+          <td><%= @item.introduction %></td>
+        </tr>
+        <tr>
+          <th>税込価格</th>
+          <td><%= (@item.with_tax_price).to_s(:delimited) %>(税込)</td>
+        
+                <%= f.hidden_field :item_id, :value => @item.id %>
+                <%= f.hidden_field :customer_id, :value => @customer.id %>
+          <tr>
+            <td><%= f.select :amount, *[1..10], { include_blank: "個数選択" } %></td>
+            <td><%= f.submit "カートに入れる" %></td>
+          </tr>
+
+      </table>
+      <% end %>
+    </div>
+  </div>
+</div>
