@@ -6,10 +6,12 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
+    @order.postage = 800
     if @order.save
-      redirect_to orders_confirm_path
+      redirect_to orders_complete_path
     else
-      render new_order_path
+      render :confirm
     end
   end
 
@@ -21,7 +23,26 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    @orders = current_customer.orders
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
+    @order.postage = 800
+    @cart_items = current_customer.cart_items
+    @subtotal = 0
+    if params[:order][:select_address] == "0"
+      @order.post_code = current_customer.postal_code
+      @order.address = current_customer.address
+      @order.name = current_customer.last_name + current_customer.first_name
+    elsif params[:order][:select_address] == "1"
+      @ship = Address.find(params[:ship_address_id])
+      @order.post_code = @ship.postal_code
+      @order.address = @ship.address
+      @order.name = @ship.name
+    elsif params[:order][:select_address] == "2"
+      @order.post_code = params[:order][:postal_code]
+      @order.address = params[:order][:address]
+      @order.name = params[:order][:name]
+    end
+      
   end
 
   def complete

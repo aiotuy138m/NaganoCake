@@ -2,7 +2,7 @@
   <div>
     <div>
       <h3>注文情報入力</h3>
-      <%= form_with model: @order do |f| %>
+      <%= form_with model: @order, url: orders_confirm_path do |f| %>
         <%= f.label "支払い方法" %>
         <ul>
           <li><%= f.radio_button :payment_way, Order.payment_ways.key(0) %>
@@ -14,18 +14,18 @@
         <%= f.label "お届け先" %>
        <ul>
           <li>
-            <%= f.radio_button :address, current_customer.address %>
+            <%= f.radio_button :select_address, 0 %>
             <%= f.label "ご自身の住所" %>
             <%= current_customer.customer_address_display %>
           </li>
 
           <li>
-            <%= f.radio_button :address, current_customer.addresses %>
+            <%= f.radio_button :select_address, 1 %>
             <%= f.label "登録済住所から選択" %>
-            <%= f.select :address, options_from_collection_for_select(current_customer.addresses, :id, :address_display) %>
+            <%= f.select :ship_address_id, options_from_collection_for_select(current_customer.addresses, :id, :address_display) %>
           </li>
 
-          <%= f.radio_button :address, ':post_code, :address, :name' %>
+          <%= f.radio_button :select_address, 2 %>
           <%= f.label "新しいお届け先" %>
           <li><table>
             <tr>
