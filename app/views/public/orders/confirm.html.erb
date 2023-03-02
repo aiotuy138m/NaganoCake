@@ -27,11 +27,19 @@
           <tr>
             <th>送料</th>
             <td><%= @order.postage %></td>
-            <th>商品合計</th>
-            
-            <th>請求額合計</th>
           </tr>
-
+          <tr>
+            <% @total = 0 %>
+            <% @cart_items.each do |cart_item| %>
+              <% @total += cart_item.subtotal %>
+            <% end %>
+            <th>商品合計</th>
+            <td><%= @total %></td>
+          </tr>
+          <tr>
+            <th>請求額合計</th>
+            <td><%= @total + @order.postage %></td>
+          </tr>
         </tbody>
         <tr>
           <th>支払い方法</th>
@@ -46,7 +54,12 @@
           </td>
         </tr>
       </table>
-      <%= form_with model: @order do |f| %>
+      <%= form_with model: Order.new do |f| %>
+        <%= f.hidden_field :customer_id, :value => @order.customer_id %>
+        <%= f.hidden_field :post_code, :value => @order.post_code %>
+        <%= f.hidden_field :address, :value => @order.address %>
+        <%= f.hidden_field :name, :value => @order.name %>
+        <%= f.hidden_field :payment_way, :value => @order.payment_way %>
         <%= f.submit "注文を確定する" %>
       <% end %>
     </div>

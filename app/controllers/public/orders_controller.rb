@@ -9,7 +9,9 @@ class Public::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     @order.postage = 800
     if @order.save
-      redirect_to orders_complete_path
+      @cart_items = current_customer.cart_items
+      @cart_items.destroy_all
+      redirect_to complete_orders_path
     else
       render :confirm
     end
@@ -27,13 +29,12 @@ class Public::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     @order.postage = 800
     @cart_items = current_customer.cart_items
-    @subtotal = 0
     if params[:order][:select_address] == "0"
       @order.post_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.name = current_customer.last_name + current_customer.first_name
     elsif params[:order][:select_address] == "1"
-      @ship = Address.find(params[:ship_address_id])
+      @ship = Address.find(params[:order][:ship_address_id])
       @order.post_code = @ship.postal_code
       @order.address = @ship.address
       @order.name = @ship.name
@@ -42,7 +43,7 @@ class Public::OrdersController < ApplicationController
       @order.address = params[:order][:address]
       @order.name = params[:order][:name]
     end
-      
+
   end
 
   def complete

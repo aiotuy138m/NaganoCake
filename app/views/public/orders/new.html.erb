@@ -2,7 +2,7 @@
   <div>
     <div>
       <h3>注文情報入力</h3>
-      <%= form_with model: @order, url: orders_confirm_path do |f| %>
+      <%= form_with model: @order, url: confirm_orders_path do |f| %>
         <%= f.label "支払い方法" %>
         <ul>
           <li><%= f.radio_button :payment_way, Order.payment_ways.key(0) %>
