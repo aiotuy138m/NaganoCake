@@ -19,7 +19,7 @@
           </tr>
           <tr>
             <th><%= f.label "ジャンル" %></th>
-            <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %></td>
+            <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name), { include_blank: "--選択してください--" } %></td>
           </tr>
           <tr>
             <th><%= f.label "税抜価格" %></th>
