@@ -32,6 +32,7 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @postage = 800
   end
 
   def confirm
