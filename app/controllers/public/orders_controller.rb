@@ -8,10 +8,18 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.postage = 800
+    cart_items = current_customer.cart_items
     if @order.save
-      @cart_items = current_customer.cart_items
-      @cart_items.destroy_all
+      cart_items.each do |cart_item|
+        order_detail = OrderDetail.new
+        order_detail.item_id = cart_item.item_id
+        order_detail.order_id = @order.id
+        order_detail.amount = cart_item.amount
+        order_detail.price = cart_item.item.with_tax_price
+        order_detail.save
+      end
       redirect_to complete_orders_path
+      cart_items.destroy_all
     else
       render :confirm
     end
@@ -19,6 +27,7 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = current_customer.orders
+    @postage = 800
   end
 
   def show
@@ -55,6 +64,10 @@ class Public::OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:post_code, :address, :name, :payment_way)
+  end
+
+  def order_detail_params
+    params.require(:order_detail).permit(:item_id, :order_id, :price, :amount, :making_status)
   end
 
 end
