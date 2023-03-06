@@ -1,2 +1,87 @@
-<h1>Admin::Orders#show</h1>
-<p>Find me in app/views/admin/orders/show.html.erb</p>
+<div>
+  <div>
+    <div>
+      <h3>注文履歴詳細</h3>
+      <%= form_with model: @order, url: admin_order_path do |f| %>
+      <table>
+        <tr>
+          <th>購入者</th>
+          <td>
+            <%= link_to admin_customer_path(@customer.id) do %>
+              <%= @customer.last_name + @customer.first_name %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>注文日</th>
+          <tr><%= @order.created_at.strftime('%Y/%m/%d') %></tr>
+        </tr>
+        <tr>
+          <th>配送先</th>
+          <td>
+            <%= "〒" + @order.post_code %>
+            <%= @order.address %></br>
+            <%= @order.name %>
+          </td>
+        </tr>
+        <tr>
+          <th>支払い方法</th>
+          <td><%= @order.payment_way_i18n %></td>
+        </tr>
+        <tr>
+          <th>注文ステータス</th>
+            <td>
+              <%= f.select :status, Order.statuses.keys.map{|k|[t("enums.order.status.#{k}"),k]} %>
+              <%= f.submit '更新', method: :patch %>
+            </td>
+        </tr>
+      </table>
+      <% end %>
+      <table>
+        <tr>
+          <th>商品名</th>
+          <th>単価(税込)</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th>製作ステータス</th>
+        </tr>
+        <% @order.order_details.each do |order_detail| %>
+        <tr>
+          <td>
+            <%= order_detail.item.name %>
+          </td>
+          <td><%= order_detail.price %></td>
+          <td><%= order_detail.amount %></td>
+          <% @subtotal = 0 %>
+          <td><%= order_detail.subtotal %></td>
+          <% @subtotal += order_detail.subtotal %>
+          <td>
+          <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id) do |f| %>
+            <%= f.select :making_status, OrderDetail.making_statuses.keys.map{|k|[t("enums.order_detail.making_status.#{k}"),k]} %>
+            <%= f.submit '更新', method: :patch %>
+          <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <table>
+        <% @total = 0 %>
+          <% @order.order_details.each do |order_detail| %>
+          <% @total += order_detail.subtotal %>
+        <% end %>
+        <tr>
+          <th>商品合計</th>
+          <td><%= @total %></td>
+        </tr>
+        <tr>
+          <th>送料</th>
+          <td><%= @postage %></td>
+        </tr>
+        <tr>
+          <th>請求金額合計</th>
+          <td><%= @total + @postage %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
