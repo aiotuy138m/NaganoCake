@@ -12,7 +12,13 @@
 <h1>新着商品</h1>
 <% @items.each do |items| %>
   <table>
-    <tr><td><%= image_tag items.get_image(100, 100) %></td></tr>
+    <tr>
+      <td>
+        <%= link_to item_path(items.id) do %>
+          <%= image_tag items.get_image(100, 100) %>
+        <% end %>
+      </td>
+    </tr>
     <tr><td><%= items.name %></td></tr>
     <tr><td>¥<%= (items.price*1.1).round.to_s(:delimited) %></td></tr>
   </table>

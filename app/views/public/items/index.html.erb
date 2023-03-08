@@ -17,7 +17,7 @@
         <tr><td>¥<%= (items.price*1.1).round.to_s(:delimited) %></td></tr>
       </table>
       <% end %>
-      <!--ページネーション!-->
+      <%= paginate @items %>
     </div>
   </div>
 </div>
