@@ -1,23 +1,23 @@
-<div>
-  <div>
-    <div>
-      <h2>配送先</h2>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4 class="ml-5">配送先編集</h4>
       <%= form_with model: @address do |f| %>
-      <table>
+      <table class="table table-borderless">
         <tr>
-          <th><%= f.label "郵便番号(ハイフンなし)" %></th>
+          <th class="col-3"><%= f.label "郵便番号(ハイフンなし)" %></th>
           <td><%= f.text_field :postal_code %></td>
           <td></td>
         </tr>
         <tr>
-          <th><%= f.label "住所" %></th>
-          <td><%= f.text_field :address %></td>
-          <td></td>
+          <th class="col-3"><%= f.label "住所" %></th>
+          <td colspan="2"><%= f.text_field :address, class:"col-12" %></td>
         </tr>
         <tr>
-          <th><%= f.label "宛名" %></th>
+          <th class="col-3"><%= f.label "宛名" %></th>
           <td><%= f.text_field :name %></td>
-          <td><%= f.submit "変更内容を保存", method: :patch %></td>
+          <td></td>
+          <td><%= f.submit "変更内容を保存", method: :patch, class:"btn btn-success" %></td>
         </tr>
       </table>
       <% end %>
