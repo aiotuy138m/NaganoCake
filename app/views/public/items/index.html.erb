@@ -4,17 +4,17 @@
       <h2>商品一覧</h2>
       <p>全<%= @items.count %>件</p>
       <!--横４件ずつ表示の2段wrap使う!-->
-      <% @items.each do |items| %>
+      <% @items.each do |item| %>
       <table>
         <tr>
           <td>
-          <%= link_to item_path(items.id) do %>
-            <%= image_tag items.get_image(100, 100) %>
+          <%= link_to item_path(item.id) do %>
+            <%= image_tag item.get_image(100, 100) %>
           <% end %>
           </td>
         </tr>
-        <tr><td><%= items.name %></td></tr>
-        <tr><td>¥<%= (items.price*1.1).round.to_s(:delimited) %></td></tr>
+        <tr><td><%= item.name %></td></tr>
+        <tr><td>¥<%= (item.with_tax_price).to_s(:delimited) %></td></tr>
       </table>
       <% end %>
       <%= paginate @items %>

@@ -8,8 +8,8 @@ class Item < ApplicationRecord
 
   def get_image(width, hight)
     unless image.attached?
-      file_path = Rails.root.join('app/assets/images/default-image.jpg')
-      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      file_path = Rails.root.join('app/assets/images/no-image.png')
+      image.attach(io: File.open(file_path), filename: 'no-image.png', content_type: 'image/png')
     end
     image.variant(resize_to_limit: [width, hight]).processed
   end
