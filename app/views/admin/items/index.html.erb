@@ -1,5 +1,8 @@
-<h1>商品一覧</h1>
-<%= link_to "＋", new_admin_item_path %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4>商品一覧</h4>
+<%= link_to "＋", new_admin_item_path, class:"font-weight-bold btn btn-outline-secondary rounded-circle shadow p-0", style: "width:2rem;height:2rem;" %>
 <table>
   <tr>
     <th>商品ID</th>
@@ -17,9 +20,12 @@
       <% end %>
     </td>
     <td><%= items.price %></td>
-    <td><%= items.genre_id %></td>
+    <td><%= items.genre.name %></td>
     <td><%= items.is_active ? '販売中' : '販売停止中' %></td>
   </tr>
   <% end %>
 </table>
 <%= paginate @items %>
+    </div>
+  </div>
+</div>
