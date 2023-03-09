@@ -27,7 +27,7 @@
                 <%= f.submit '変更', class:"btn btn-success ml-3" %>
               </td>
             <% end %>
-            
+
             <td><%= (cart_item.subtotal).to_s(:delimited) %></td>
             <td class="text-center col-2"><%= link_to "削除する", cart_item_path(cart_item), method: :delete, class:"btn btn-danger" %></td>
           </tr>
@@ -52,6 +52,10 @@
         </div>
       </div>
       </div>
+      <% if @cart_items.present? %>
       <div class="container text-center">
         <%= link_to "情報入力に進む", new_order_path, class:"btn btn-success col-2" %>
       </div>
+      <% else %>
+      <div></div>
+      <% end %>
