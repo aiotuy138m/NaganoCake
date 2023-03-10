@@ -14,6 +14,8 @@ class Item < ApplicationRecord
     image.variant(resize_to_limit: [width, hight]).processed
   end
 
+  enum is_active: { sale: true, stop_selling: false }
+
   def with_tax_price
     (price*1.1).floor
   end
