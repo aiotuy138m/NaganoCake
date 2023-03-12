@@ -22,8 +22,9 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     @customer = Customer.find(current_customer.id)
-    if @customer.toggle(:is_deleted)
-      redirect_to about_path
+    if @customer.update(is_deleted: true)
+      reset_session
+      redirect_to root_path
     else
       render customers_confirm_path
     end
