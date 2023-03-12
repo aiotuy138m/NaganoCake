@@ -37,9 +37,9 @@ class Public::SessionsController < Devise::SessionsController
   # 退会しているかを判断するメソッド
   def customer_state
     @customer = Customer.find_by(email: params[:customer][:email])
-    if @customer
-      if @customer.valid_password?(params[:customer][:password]) && @customer.is_deleted
-         redirect_to new_customer_registration_path
+    if @customer.valid_password?(params[:customer][:password])
+      if @customer.is_deleted == "deleted"
+          redirect_to new_customer_registration_path
       end
     end
   end
