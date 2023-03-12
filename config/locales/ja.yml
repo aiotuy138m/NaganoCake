@@ -20,6 +20,10 @@
         is_active:
           sale: "販売中"
           stop_selling: "販売停止中"
+      customer:
+        is_deleted:
+          deleted: "退会"
+          undeleted: "有効"
     views:
       pagination:
         first: "&laquo; 最初"

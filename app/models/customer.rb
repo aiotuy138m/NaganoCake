@@ -12,4 +12,6 @@ class Customer < ApplicationRecord
     '〒' + postal_code + ' ' + address + ' ' + last_name + first_name
   end
   
+  enum is_deleted: { deleted: true, undeleted: false } 
+  
 end
