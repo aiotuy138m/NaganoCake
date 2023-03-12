@@ -20,7 +20,7 @@ class Public::SessionsController < Devise::SessionsController
    end
 
    def after_sign_in_path_for(resource)
-     customers_my_page_path
+     root_path
    end
 
    def after_sign_out_path_for(resource)
@@ -37,13 +37,10 @@ class Public::SessionsController < Devise::SessionsController
   # 退会しているかを判断するメソッド
   def customer_state
     @customer = Customer.find_by(email: params[:customer][:email])
-    return if !@customer
-    if @customer.valid_password?(params[:customer][:password]) && @customer.is_deleted == true
-      if true && !false
+    if @customer
+      if @customer.valid_password?(params[:customer][:password]) && @customer.is_deleted
          redirect_to new_customer_registration_path
-      return else
       end
     end
   end
-
 end
