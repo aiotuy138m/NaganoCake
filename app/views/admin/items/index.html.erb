@@ -1,25 +1,33 @@
-<h1>商品一覧</h1>
-<%= link_to "＋", new_admin_item_path %>
-<table>
-  <tr>
-    <th>商品ID</th>
-    <th>商品名</th>
-    <th>税抜価格</th>
-    <th>ジャンル</th>
-    <th>ステータス</th>
-  </tr>
-  <% @items.each do |items| %>
-  <tr>
-    <td><%= items.id %></td>
-    <td>
-      <%= link_to admin_item_path(items.id) do %>
-        <%= items.name %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4 class="ml-5">商品一覧</h4>
+      <div class="d-flex">
+        <p class="ml-auto"><%= link_to "＋", new_admin_item_path, class: "font-weight-bold btn btn-light rounded-circle shadow p-0", style: "font-size:25px;width:3rem;height:3rem;text-align:center;line-height:48px;" %></p>
+      </div>
+      <table class="table table-borderless">
+        <tr>
+          <th class="col-1">商品ID</th>
+          <th class="col-3">商品名</th>
+          <th class="col-1">税抜価格</th>
+          <th class="col-3">ジャンル</th>
+          <th class="col-1">ステータス</th>
+        </tr>
+      <% @items.each do |items| %>
+        <tr>
+          <td><%= items.id %></td>
+          <td>
+            <%= link_to admin_item_path(items.id), class:"border-bottom", :style=>"color:black;" do %>
+              <%= items.name %>
+            <% end %>
+          </td>
+          <td><%= (items.price).to_s(:delimited) %></td>
+          <td><%= items.genre.name %></td>
+          <td class="<%= "text-success" if items.is_active == "sale" %><%= "text-muted" if items.is_active == "stop_selling" %>"><%= items.is_active_i18n %></td>
+        </tr>
       <% end %>
-    </td>
-    <td><%= items.price %></td>
-    <td><%= items.genre_id %></td>
-    <td><%= items.is_active ? '販売中' : '販売停止中' %></td>
-  </tr>
-  <% end %>
-</table>
-<%= paginate @items %>
+      </table>
+      <%= paginate @items %>
+    </div>
+  </div>
+</div>

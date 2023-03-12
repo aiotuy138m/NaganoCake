@@ -1,23 +1,29 @@
-<div>
-  <div>
-    <div>
-      <h2>商品一覧</h2>
-      <p>全<%= @items.count %>件</p>
-      <!--横４件ずつ表示の2段wrap使う!-->
-      <% @items.each do |items| %>
-      <table>
-        <tr>
-          <td>
-          <%= link_to item_path(items.id) do %>
-            <%= image_tag items.get_image(100, 100) %>
-          <% end %>
-          </td>
-        </tr>
-        <tr><td><%= items.name %></td></tr>
-        <tr><td>¥<%= (items.price*1.1).round.to_s(:delimited) %></td></tr>
-      </table>
-      <% end %>
-      <!--ページネーション!-->
+<div class="container">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-8">
+      <div class="d-flex align-items-end">
+        <h2>商品一覧</h2>
+        <p>(全<%= @items.count %>件)</p>
+      </div>
+      <div class="d-flex flex-wrap">
+        <% @items.each do |item| %>
+        <table class="m-2">
+          <tr>
+            <td>
+              <%= link_to item_path(item.id) do %>
+                <%= image_tag item.get_image(150, 150) %>
+              <% end %>
+            </td>
+          </tr>
+          <tr><td><%= item.name %></td></tr>
+          <tr><td>¥<%= (item.with_tax_price).to_s(:delimited) %></td></tr>
+        </table>
+        <% end %>
+      </div>
+      <div>
+        <%= paginate @items %>
+      </div>
     </div>
   </div>
 </div>

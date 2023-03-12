@@ -1,47 +1,58 @@
-<div>
-  <div>
-    <div>
-      <h2>会員情報編集</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <h4 class="ml-5 mb-3">会員情報編集</h4>
       <%= form_with model: @customer, url: customers_information_path do |f| %>
-      <table>
-    <tr>
-      <th><%= f.label "氏名" %></th>
-      <td>
-        <%= f.text_field :last_name %>
-        <%= f.text_field :first_name %>
-      </td>
-    </tr>
-    <tr>
-      <th><%= f.label "フリガナ" %></th>
-      <td>
-        <%= f.text_field :last_name_kana %>
-        <%= f.text_field :first_name_kana %>
-      </td>
-    </tr>
-    <tr>
-      <th><%= f.label "郵便番号" %></th>
-      <td><%= f.text_field :postal_code %></td>
-    </tr>
-    <tr>
-      <th><%= f.label "住所" %></th>
-      <td><%= f.text_field :address %></td>
-    </tr>
-    <tr>
-      <th><%= f.label "電話番号" %></th>
-      <td><%= f.text_field :telephone_number %></td>
-    </tr>
-    <tr>
-      <th><%= f.label "メールアドレス" %></th>
-      <td><%= f.text_field :email %></td>
-    </tr>
-    
-    <tr>
-      <th></th>
-      <td><%= f.submit "編集内容を保存", url: customers_information_path, method: :patch %></td>
-      <td><%= link_to "退会する", customers_confirm_path %></td>
-    </tr>
-  </table>
-  <% end %>
+      <table class="table table-borderless">
+        <tr>
+          <th><%= f.label "氏名" %></th>
+          <td>
+            <%= f.text_field :last_name %>
+            <%= f.text_field :first_name %>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= f.label "フリガナ" %></th>
+          <td>
+            <%= f.text_field :last_name_kana %>
+            <%= f.text_field :first_name_kana %>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= f.label "郵便番号" %></th>
+          <td><%= f.text_field :postal_code %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= f.label "住所" %></th>
+          <td colspan="3"><%= f.text_field :address, class:"col-12" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label "電話番号" %></th>
+          <td><%= f.text_field :telephone_number %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= f.label "メールアドレス" %></th>
+          <td><%= f.text_field :email %></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      <table class="table table-borderless ml-5">
+        <tr>
+          <td class="col-2"></td>
+          <td><%= f.submit "編集内容を保存", url: customers_information_path, method: :patch, class:"btn btn-success col-8" %></td>
+          <td><%= link_to "退会する", customers_confirm_path, class:"btn btn-danger col-5" %></td>
+        </tr>
+      </table>
+      <% end %>
     </div>
   </div>
 </div>
