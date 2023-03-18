@@ -1,0 +1,52 @@
+<h4 class="ml-5">マイページ</h4>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="d-flex p-3">
+        <p class="mr-4 h5 font-weight-bold">登録情報</p>
+        <%= link_to "編集する", customers_information_edit_path, class:"btn btn-success" %>
+      </div>
+      <table class="table table-bordered col-8">
+        <tr>
+          <th class="col-3">氏名</th>
+          <td>
+            <%= @customer.last_name %>
+            <%= @customer.first_name %>
+          </td>
+        </tr>
+        <tr>
+          <th class="col-3">フリガナ</th>
+          <td>
+            <%= @customer.last_name_kana %>
+            <%= @customer.first_name_kana %>
+          </td>
+        </tr>
+        <tr>
+          <th class="col-3">郵便番号</th>
+          <td><%= @customer.postal_code %></td>
+        </tr>
+        <tr>
+          <th class="col-3">住所</th>
+          <td><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <th class="col-3">電話番号</th>
+          <td><%= @customer.telephone_number %></td>
+        </tr>
+        <tr>
+          <th class="col-3">メールアドレス</th>
+          <td><%= @customer.email %></td>
+      </table>
+      <table class="table table-borderless">
+        </tr>
+          <th class="col-1">配送先</th>
+          <td><%= link_to "一覧を見る", addresses_path, class:"btn btn-primary" %></td>
+        </tr>
+        <tr>
+          <th class="col-1">注文履歴</th>
+          <td><%= link_to "一覧を見る", orders_path, class:"btn btn-primary" %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

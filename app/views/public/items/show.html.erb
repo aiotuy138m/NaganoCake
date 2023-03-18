@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-3"><%= image_tag @item.get_image(200, 300) %></div>
+    <div class="col-5">
+      <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+        <h5 class="font-weight-bold"><%= @item.name %></h5>
+        <p><%= @item.introduction %></p>
+        <h5 class="mt-5 mb-4"><%= (@item.with_tax_price).to_s(:delimited) %>(税込)</h5>
+        <%= f.hidden_field :item_id, :value => @item.id %>
+        <% if customer_signed_in? %>
+          <%= f.hidden_field :customer_id, :value => @customer.id %>
+        <% end %>
+        <%= f.select :amount, *[1..10], { include_blank: "個数選択" }, class:"custom-select col-3" %>
+        <%= f.submit "カートに入れる", class:"btn btn-success ml-4" %>
+      <% end %>
+    </div>
+  </div>
+</div>

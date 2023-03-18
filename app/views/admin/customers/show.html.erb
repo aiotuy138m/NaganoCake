@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10">
+      <h4 class="ml-5 mb-5"><%= @customer.last_name+@customer.first_name %>さんの会員情報</h4>
+      <table class="table table-borderless table-sm">
+        <tr>
+          <th class="co-1">会員ID</th>
+          <td><%= @customer.id %></td>
+        </tr>
+        <tr>
+          <th class="co-1">氏名</th>
+          <td>
+            <%= @customer.last_name %>
+            <%= @customer.first_name %>
+          </td>
+        </tr>
+        <tr>
+          <th class="co-1">フリガナ</th>
+          <td>
+            <%= @customer.last_name_kana %>
+            <%= @customer.first_name_kana %>
+          </td>
+        </tr>
+        <tr>
+          <th class="co-1">郵便番号</th>
+          <td><%= @customer.postal_code %></td>
+        </tr>
+        <tr>
+          <th class="co-1">住所</th>
+          <td><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <th class="co-1">電話番号</th>
+          <td><%= @customer.telephone_number %></td>
+        </tr>
+        <tr>
+          <th class="co-1">メールアドレス</th>
+          <td><%= @customer.email %></td>
+        </tr>
+        <tr>
+          <th class="co-1">会員ステータス</th>
+          <td class="<%= "text-success" if @customer.is_deleted == "undeleted" %><%= "text-muted" if @customer.is_deleted == "deleted" %>"><%= @customer.is_deleted_i18n %></td>
+        </tr>
+        <tr>
+          <th class="co-1"></th>
+          <td><%= link_to "編集する", edit_admin_customer_path, class:"btn btn-success col-2" %>
+              <%= link_to "注文履歴一覧を見る", admin_root_path, class:"btn btn-primary ml-5" %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
